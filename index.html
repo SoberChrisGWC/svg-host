@@ -139,16 +139,16 @@
           <div class="diagram-group-heading"><h3>SQL Agent 细节</h3><p>检索、执行边界与 Agent 循环的展开</p></div>
           <div class="diagram-grid is-detail">
             <a class="diagram-card" href="./four_way_retrieval.svg" target="_blank" rel="noopener">
-              <div class="diagram-preview"><img src="./four_way_retrieval.svg" alt="四路检索局部预览：候选范围求交、表与字段级 ANN、业务文档与历史 SQL 召回、列级 Schema Linking 与上下文打包，打开可查看完整长图" width="898" height="1298" loading="lazy"></div>
+              <div class="diagram-preview"><img src="./four_way_retrieval.svg" alt="四路检索局部预览：候选范围求交、表与字段级 ANN、业务文档与历史 SQL 召回、列级 Schema Linking 与上下文打包，打开可查看完整长图" width="865" height="1466" loading="lazy"></div>
               <div class="diagram-description"><h4>四路检索与列级 Schema Linking <span class="arrow" aria-hidden="true">↗</span></h4><p>业务域与用户授权求交后并行四路召回，经列级 Schema Linking 与 token 预算打包成请求上下文；无可信候选时确定性拒答，不回退全库。</p><span class="text-link">查看完整 SVG</span></div>
             </a>
             <a class="diagram-card" href="./sql_boundary.svg" target="_blank" rel="noopener">
-              <div class="diagram-preview"><img src="./sql_boundary.svg" alt="SQL 执行安全边界局部预览：单语句 SELECT 与 AST 校验、物理表访问校验、RAG grounding 校验、策略引擎与带超时的只读运行时，打开可查看完整长图" width="1323" height="1361" loading="lazy"></div>
+              <div class="diagram-preview"><img src="./sql_boundary.svg" alt="SQL 执行安全边界局部预览：单语句 SELECT 与 AST 校验、物理表访问校验、RAG grounding 校验、策略引擎与带超时的只读运行时，打开可查看完整长图" width="1231" height="1511" loading="lazy"></div>
               <div class="diagram-description"><h4>SQL 执行安全边界 <span class="arrow" aria-hidden="true">↗</span></h4><p>候选 SQL 依次通过语法与 AST 校验、物理表访问校验、grounding 校验与策略引擎，才进入带超时的只读运行时；命中审核规则则转审核单。</p><span class="text-link">查看完整 SVG</span></div>
             </a>
             <a class="diagram-card" href="./react_loop.svg" target="_blank" rel="noopener">
-              <div class="diagram-preview is-wide"><img src="./react_loop.svg" alt="ReAct 循环预览：模型在请求级预算内选择工具，校验与数据库错误回流为 Observation，执行结果分为成功、失败与需人工审核三种终态" width="2011" height="824" loading="lazy"></div>
-              <div class="diagram-description"><h4>ReAct 循环与预算控制 <span class="arrow" aria-hidden="true">↗</span></h4><p>模型在请求级 AgentBudget 内选择工具；校验与数据库错误回流为 Observation，终态分为成功、失败与需人工审核，预算耗尽即有界退出。</p><span class="text-link">查看完整 SVG</span></div>
+              <div class="diagram-preview is-wide"><img src="./react_loop.svg" alt="ReAct 循环预览：模型在请求级预算内选择工具，校验与数据库错误回流为 Observation，执行结果分为成功、失败与需人工审核三种终态" width="1976" height="916" loading="lazy"></div>
+              <div class="diagram-description"><h4>ReAct 循环与预算控制 <span class="arrow" aria-hidden="true">↗</span></h4><p>模型在请求级预算内选择工具；校验与数据库错误回流为 Observation，终态分为成功、失败与需人工审核，预算耗尽即有界退出。</p><span class="text-link">查看完整 SVG</span></div>
             </a>
           </div>
         </div>
