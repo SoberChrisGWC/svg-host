@@ -75,6 +75,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fo
 .project-links { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
 .link-row { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 24px; row-gap: 8px; }
 .link-row a { font-size: .875rem; font-weight: 550; }
+.link-row + .link-row { margin-top: 12px; }
 .project-links .field-label { margin: 0; }
 details { margin-top: 12px; }
 summary { width: fit-content; cursor: pointer; color: var(--blue); font-size: .875rem; font-weight: 550; }
@@ -88,9 +89,19 @@ summary { width: fit-content; cursor: pointer; color: var(--blue); font-size: .8
 .diagram-preview { height: 216px; padding: 22px; overflow: hidden; border-bottom: 1px solid var(--line); background: #fff; }
 .diagram-preview img { width: 100%; height: auto; }
 .diagram-description { padding: 22px 24px; }
-.diagram-description h3 { display: flex; justify-content: space-between; gap: 14px; font-size: 1.05rem; }
+.diagram-description h4 { display: flex; justify-content: space-between; gap: 14px; font-size: 1.05rem; }
 .diagram-description p { margin: 8px 0 14px; color: var(--muted); font-size: .875rem; }
 .diagram-description .text-link { color: var(--blue); font-size: .875rem; font-weight: 550; }
+.diagram-group + .diagram-group { margin-top: 30px; }
+.diagram-group-heading { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 14px; margin-bottom: 16px; }
+.diagram-group-heading h3 { font-size: 1rem; }
+.diagram-group-heading p { color: var(--muted); font-size: .875rem; }
+.diagram-grid.is-detail { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.is-detail .diagram-preview { height: 178px; padding: 16px; }
+.is-detail .diagram-preview.is-wide { display: flex; align-items: center; }
+.is-detail .diagram-description { padding: 18px 20px; }
+.is-detail .diagram-description h4 { font-size: .98rem; }
+.is-detail .diagram-description p { margin: 8px 0 12px; }
 .reading-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px; }
 .readme-card, .blog-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 28px 30px; background: var(--paper); }
 .readme-card { border-left: 3px solid var(--blue); }
@@ -129,6 +140,7 @@ td:first-child { white-space: nowrap; }
 .boundary { padding: 18px 20px; background: var(--ground); border: 1px solid var(--line); border-radius: 8px; }
 
 @media (max-width: 900px) {
+  .diagram-grid.is-detail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .site-nav { gap: 18px; }
   .hero-grid { gap: 40px; }
   .document-layout { grid-template-columns: minmax(0, 1fr); }
@@ -156,7 +168,8 @@ td:first-child { white-space: nowrap; }
   .status { padding-inline: 7px; }
   .project-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .diagram-grid, .reading-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
-  .diagram-preview { height: 190px; }
+  .diagram-grid.is-detail { grid-template-columns: minmax(0, 1fr); }
+  .diagram-preview, .is-detail .diagram-preview { height: 190px; }
   .readme-card, .blog-card { padding: 24px 22px; }
   .document-layout { padding-top: 24px; }
   .document { padding: 26px 20px; }

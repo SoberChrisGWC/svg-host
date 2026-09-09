@@ -76,9 +76,10 @@
           </dl>
           <div class="project-links">
             <div class="link-row"><h4 class="field-label"><span>05</span>深入链接</h4><a href="./nl2sql_overview.svg" target="_blank" rel="noopener">查看 NL2SQL 架构图 ↗</a><a href="#sql-agent" aria-label="SQL Agent 一页纸直达链接">本项目直达链接 #</a></div>
+            <div class="link-row"><h4 class="field-label"><span>06</span>细节图</h4><a href="./four_way_retrieval.svg" target="_blank" rel="noopener">四路检索与列级 Schema Linking ↗</a><a href="./sql_boundary.svg" target="_blank" rel="noopener">SQL 执行安全边界 ↗</a><a href="./react_loop.svg" target="_blank" rel="noopener">ReAct 循环与预算控制 ↗</a></div>
             <details>
               <summary>展开执行安全与成本口径</summary>
-              <div class="detail-body"><p><strong>五道执行闸：</strong>只读账号、单语句 SELECT、AST 校验、全表扫描保护、执行超时。约束固化在执行链路中，模型生成的 SQL 不能直接获得执行权。</p><p><strong>SQL Agent 线月 token 成本下降约 30%。</strong>通过重排、去重与 token 预算控制收敛上下文；这与 OCR-RAG 样本回放中的“输入上下文减少约 30%”是两个指标。</p><p class="note">AST 校验解决 SQL 执行安全；检索误拒率下降来自检索架构调整，两者分开归因。</p></div>
+              <div class="detail-body"><p><strong>五道执行闸：</strong>只读账号、单语句 SELECT、AST 校验、全表扫描保护、执行超时。约束固化在执行链路中，模型生成的 SQL 不能直接获得执行权。</p><p><strong>SQL Agent 线月 token 成本下降约 30%。</strong>通过重排、去重与 token 预算控制收敛上下文；这与 OCR-RAG 样本回放中的“输入上下文减少约 30%”是两个指标。</p><p class="note">AST 校验解决 SQL 执行安全；检索误拒率下降来自检索架构调整，两者分开归因。</p><p class="note">上述闸门与拒绝路径见 <a href="./sql_boundary.svg" target="_blank" rel="noopener">SQL 执行安全边界图 ↗</a>；四路召回与列级 Schema Linking 见 <a href="./four_way_retrieval.svg" target="_blank" rel="noopener">四路检索图 ↗</a>。</p></div>
             </details>
           </div>
         </article>
@@ -120,15 +121,36 @@
 
       <section class="section" id="architecture" aria-labelledby="architecture-title">
         <div class="section-heading"><h2 id="architecture-title"><span class="section-number">02 /</span>架构图</h2><p>原始 SVG · 可单独打开查看完整结构</p></div>
-        <div class="diagram-grid">
-          <a class="diagram-card" href="./nl2sql_overview.svg" target="_blank" rel="noopener">
-            <div class="diagram-preview"><img src="./nl2sql_overview.svg" alt="NL2SQL 架构预览：问题理解、域内检索、SQL 生成、安全执行与分析结果" width="1303" height="594" loading="lazy"></div>
-            <div class="diagram-description"><h3>NL2SQL Agent 架构设计 <span class="arrow" aria-hidden="true">↗</span></h3><p>从自然语言提问到受控只读查询，管理与运行治理贯穿全流程。</p><span class="text-link">查看完整 SVG</span></div>
-          </a>
-          <a class="diagram-card" href="./AIWorkflow_Overview.svg" target="_blank" rel="noopener">
-            <div class="diagram-preview"><img src="./AIWorkflow_Overview.svg" alt="AI 原生研发工作流局部预览，打开可查看十阶段编排、适配器与横切治理的完整长图" width="1023" height="4115" loading="lazy"></div>
-            <div class="diagram-description"><h3>AI 原生研发工作流宏观架构 <span class="arrow" aria-hidden="true">↗</span></h3><p>十阶段控制平面、可替换适配器，以及与阶段正交的治理底座。</p><span class="text-link">查看完整 SVG 长图</span></div>
-          </a>
+        <div class="diagram-group">
+          <div class="diagram-group-heading"><h3>总览</h3><p>两条线的整体结构</p></div>
+          <div class="diagram-grid">
+            <a class="diagram-card" href="./nl2sql_overview.svg" target="_blank" rel="noopener">
+              <div class="diagram-preview"><img src="./nl2sql_overview.svg" alt="NL2SQL 架构预览：问题理解、域内检索、SQL 生成、安全执行与分析结果" width="1303" height="594" loading="lazy"></div>
+              <div class="diagram-description"><h4>NL2SQL Agent 架构设计 <span class="arrow" aria-hidden="true">↗</span></h4><p>从自然语言提问到受控只读查询，管理与运行治理贯穿全流程。</p><span class="text-link">查看完整 SVG</span></div>
+            </a>
+            <a class="diagram-card" href="./AIWorkflow_Overview.svg" target="_blank" rel="noopener">
+              <div class="diagram-preview"><img src="./AIWorkflow_Overview.svg" alt="AI 原生研发工作流局部预览，打开可查看十阶段编排、适配器与横切治理的完整长图" width="1023" height="4115" loading="lazy"></div>
+              <div class="diagram-description"><h4>AI 原生研发工作流宏观架构 <span class="arrow" aria-hidden="true">↗</span></h4><p>十阶段控制平面、可替换适配器，以及与阶段正交的治理底座。</p><span class="text-link">查看完整 SVG 长图</span></div>
+            </a>
+          </div>
+        </div>
+
+        <div class="diagram-group">
+          <div class="diagram-group-heading"><h3>SQL Agent 细节</h3><p>检索、执行边界与 Agent 循环的展开</p></div>
+          <div class="diagram-grid is-detail">
+            <a class="diagram-card" href="./four_way_retrieval.svg" target="_blank" rel="noopener">
+              <div class="diagram-preview"><img src="./four_way_retrieval.svg" alt="四路检索局部预览：候选范围求交、表与字段级 ANN、业务文档与历史 SQL 召回、列级 Schema Linking 与上下文打包，打开可查看完整长图" width="898" height="1298" loading="lazy"></div>
+              <div class="diagram-description"><h4>四路检索与列级 Schema Linking <span class="arrow" aria-hidden="true">↗</span></h4><p>业务域与用户授权求交后并行四路召回，经列级 Schema Linking 与 token 预算打包成请求上下文；无可信候选时确定性拒答，不回退全库。</p><span class="text-link">查看完整 SVG</span></div>
+            </a>
+            <a class="diagram-card" href="./sql_boundary.svg" target="_blank" rel="noopener">
+              <div class="diagram-preview"><img src="./sql_boundary.svg" alt="SQL 执行安全边界局部预览：单语句 SELECT 与 AST 校验、物理表访问校验、RAG grounding 校验、策略引擎与带超时的只读运行时，打开可查看完整长图" width="1323" height="1361" loading="lazy"></div>
+              <div class="diagram-description"><h4>SQL 执行安全边界 <span class="arrow" aria-hidden="true">↗</span></h4><p>候选 SQL 依次通过语法与 AST 校验、物理表访问校验、grounding 校验与策略引擎，才进入带超时的只读运行时；命中审核规则则转审核单。</p><span class="text-link">查看完整 SVG</span></div>
+            </a>
+            <a class="diagram-card" href="./react_loop.svg" target="_blank" rel="noopener">
+              <div class="diagram-preview is-wide"><img src="./react_loop.svg" alt="ReAct 循环预览：模型在请求级预算内选择工具，校验与数据库错误回流为 Observation，执行结果分为成功、失败与需人工审核三种终态" width="2011" height="824" loading="lazy"></div>
+              <div class="diagram-description"><h4>ReAct 循环与预算控制 <span class="arrow" aria-hidden="true">↗</span></h4><p>模型在请求级 AgentBudget 内选择工具；校验与数据库错误回流为 Observation，终态分为成功、失败与需人工审核，预算耗尽即有界退出。</p><span class="text-link">查看完整 SVG</span></div>
+            </a>
+          </div>
         </div>
       </section>
 
