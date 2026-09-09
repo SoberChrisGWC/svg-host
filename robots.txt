@@ -1,0 +1,14 @@
+# 说明：GitHub Pages 项目站点下，本文件位于 /svg-host/robots.txt，
+# 爬虫只读取域名根目录的 https://soberchrisgwc.github.io/robots.txt，
+# 因此本文件当前不生效。真正起作用的是各页面 <head> 里的
+# <meta name="robots" content="noindex, nofollow">。
+# 若日后绑定自定义域名（本仓库成为站点根），本文件自动生效。
+
+# 允许抓取 HTML —— 必须允许，爬虫读到页面才能看到 noindex。
+# 用 Disallow 挡住抓取反而会让 noindex 永远读不到。
+User-agent: *
+Allow: /
+
+# SVG 无法写 meta，GitHub Pages 也不能自定义 X-Robots-Tag 响应头，
+# 只能靠 robots.txt 挡图片搜索收录。
+Disallow: /*.svg$
