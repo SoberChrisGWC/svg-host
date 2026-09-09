@@ -91,7 +91,7 @@
           </header>
           <dl class="project-grid">
             <div><dt class="field-label"><span>01</span>业务问题</dt><dd>业务人员从扫描件、跨页表格与复杂版式文档中查找信息，人工定位慢。OCR 的错字、错数和表头丢失还会传递到答案，必须能回到原页复核。</dd></div>
-            <div><dt class="field-label"><span>02</span>我负责的范围</dt><dd>2024.05–2026.03，在 NTT DATA 带 5 人技术线共同交付两条生产线；本项目于 2025.12 首次上线。负责双图架构、OCR 解析与切分、入库状态机及任务重试。</dd></div>
+            <div><dt class="field-label"><span>02</span>我负责的范围</dt><dd>2024.05–2026.03，在某大型日系 IT 服务企业带 5 人技术线共同交付两条生产线；本项目于 2025.12 首次上线。负责双图架构、OCR 解析与切分、入库状态机及任务重试。</dd></div>
             <div><dt class="field-label"><span>03</span>一个关键技术取舍</dt><dd>把<strong>在线问答与离线入库拆成两张图</strong>，用带版本的文档中间结构隔离 OCR 与下游。否掉“一条链串完入库和问答”：两者的延迟与吞吐诉求不同，拆开后可独立恢复、演进，入库失败不阻断已入库文档的在线问答。</dd></div>
             <div><dt class="field-label"><span>04</span>结果与口径</dt><dd><strong class="metric">P95 约 3.2s</strong><span class="metric-note">已入库文档的在线问答延迟，不含首次入库。</span><p class="secondary-result">灰度期业务采纳率 <strong>约 70%</strong>。</p><span class="metric-note">样本回放中，通过重排、去重与 token 预算控制，输入上下文减少约 30%。</span></dd></div>
           </dl>
