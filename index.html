@@ -112,7 +112,7 @@
             <div><dt class="field-label"><span>01</span>业务问题</dt><dd>研发人员把编码交给模型后，仍要判断变更是否满足需求、证据是否对应当前代码。返工时沿用旧检查或旧审批，会让新代码带着上一版结论进入交付。</dd></div>
             <div><dt class="field-label"><span>02</span>我负责的范围</dt><dd>2026.04 至今，1 人独立完成架构、实现与自动化测试。自研并在运行的 AI 研发流水线，可现场演示，源码暂不公开。</dd></div>
             <div><dt class="field-label"><span>03</span>一个关键技术取舍</dt><dd>每阶段采用<strong>生成 → 确定性验证 → 裁决</strong>，否掉“一个大 Agent 自由循环调工具”。模型只提交候选；系统管理补丁、测试、证据与审批。退回重写时，下游检查、人审和 CI 结论级联失效，重新取证。</dd></div>
-            <div><dt class="field-label"><span>04</span>结果与口径</dt><dd><strong class="metric">10 阶段 · 72 条测试</strong><span class="metric-note">十阶段全部设有不依赖模型的确定性验收；约 7,000 行 Python、72 条自动化测试仅说明实现规模。</span><p class="secondary-result">未对外商用，无生产吞吐或提效数据。GitHub 模式停在可合并状态，不自动合并。</p></dd></div>
+            <div><dt class="field-label"><span>04</span>结果与口径</dt><dd><strong class="metric">10 阶段 · 201 条测试</strong><span class="metric-note">十阶段全部设有不依赖模型的确定性验收；10,424 行 Python 源码、201 条自动化测试仅说明实现规模（含控制台，统计于 2026.09.09）。</span><p class="secondary-result">未对外商用，无生产吞吐或提效数据。GitHub 模式停在可合并状态，不自动合并。</p></dd></div>
           </dl>
           <div class="project-links"><div class="link-row"><h4 class="field-label"><span>05</span>深入链接</h4><a href="./AIWorkflow_Overview.svg" target="_blank" rel="noopener">查看工作流架构图 ↗</a><a href="./ai-sdlc.html">阅读公开版 README →</a><a href="#ai-sdlc" aria-label="AI-SDLC 一页纸直达链接">本项目直达链接 #</a></div></div>
         </article>

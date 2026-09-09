@@ -28,7 +28,7 @@
       <h1>AI-SDLC Pipeline</h1>
       <p class="lead">模型提供候选，裁决权在系统。</p>
       <p class="intro">自研并在运行的 AI 研发流水线，可现场演示，源码暂不公开。从一句话需求出发，经需求、方案、编码、验证与人审，在 GitHub 模式下交付到可合并的 PR。</p>
-      <p class="document-meta">独立设计与实现 · 2026.04 至今 · 约 7,000 行 Python · 72 条自动化测试</p>
+      <p class="document-meta">独立设计与实现 · 2026.04 至今 · 10,424 行 Python 源码 · 201 条自动化测试</p>
       <div class="link-row" style="margin-top: 20px"><a href="./AIWorkflow_Overview.svg" target="_blank" rel="noopener">查看工作流宏观架构 SVG ↗</a></div>
 
       <section id="decision" aria-labelledby="decision-title">
@@ -81,7 +81,11 @@
 
       <section id="boundaries" aria-labelledby="boundaries-title">
         <h2 id="boundaries-title">当前实现边界</h2>
-        <div class="boundary"><strong>自研并在运行，可现场演示；未对外商用。</strong><p>约 7,000 行 Python 和 72 条自动化测试只说明实现规模，无生产吞吐数据，也不能据此声称研发提效或商业效果。</p></div>
+        <div class="boundary">
+          <strong>自研并在运行，可现场演示；未对外商用。</strong>
+          <p>统计于 2026.09.09：流水线核心 8,960 行、控制台后端 1,464 行，共 10,424 行 Python 源码。按物理行统计，含空行与注释，不含测试代码、示例、基准脚本和第三方依赖。</p>
+          <p>自动化测试共 201 条：Python 194 条（流水线 173 条、控制台后端 21 条），控制台前端 7 条；不重复计入子测试。上述数字只说明实现规模，无生产吞吐数据，也不能据此声称研发提效或商业效果。</p>
+        </div>
         <ul>
           <li><strong>交付终态：</strong>GitHub 模式停在可合并状态，由仓库维护者决定合并；本地模式提供写回目标仓库的演示路径。发布阶段仅生成模拟计划。</li>
           <li><strong>部署形态：</strong>当前使用单机运行器与 SQLite 检查点，尚未验证企业级长任务调度和生产吞吐。</li>
