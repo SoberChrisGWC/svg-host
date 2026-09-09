@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI-SDLC 公开版 README：十阶段确定性验收、证据与审批绑定、级联失效、失败恢复及当前实现边界。自研并在运行，可现场演示，源码暂不公开。">
+  <meta name="theme-color" content="#174bcc">
+  <title>AI-SDLC · 公开版 README | SoberChrisGWC</title>
+  <link rel="canonical" href="https://soberchrisgwc.github.io/svg-host/ai-sdlc.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SoberChrisGWC">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:url" content="https://soberchrisgwc.github.io/svg-host/ai-sdlc.html">
+  <meta property="og:title" content="AI-SDLC · 公开版 README｜模型提供候选，裁决权在系统">
+  <meta property="og:description" content="自研并在运行的 AI 研发流水线：十阶段确定性验收、证据与审批绑定、返工触发级联失效，以及当前实现边界。可现场演示，源码暂不公开。">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AI-SDLC · 公开版 README｜模型提供候选，裁决权在系统">
+  <meta name="twitter:description" content="自研并在运行的 AI 研发流水线：十阶段确定性验收、证据与审批绑定、返工触发级联失效，以及当前实现边界。可现场演示，源码暂不公开。">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header"><div class="container header-inner"><a class="brand" href="./index.html" aria-label="SoberChrisGWC 作品首页"><span class="brand-mark" aria-hidden="true">S.</span>SoberChrisGWC</a><nav class="site-nav" aria-label="主导航"><a href="./index.html#projects">项目一页纸</a><a href="./index.html#architecture">架构图</a><a href="./ai-sdlc.html" aria-current="page">AI-SDLC 说明</a><a href="https://blog.csdn.net/Josh_scott" target="_blank" rel="noopener noreferrer">CSDN ↗</a></nav></div></header>
+  <div class="container document-layout">
+    <main class="document" id="main">
+      <a class="breadcrumb" href="./index.html#ai-sdlc">← 返回 AI-SDLC 项目一页纸</a>
+      <p class="eyebrow">DESIGN &amp; BOUNDARIES / PUBLIC README</p>
+      <h1>AI-SDLC Pipeline</h1>
+      <p class="lead">模型提供候选，裁决权在系统。</p>
+      <p class="intro">自研并在运行的 AI 研发流水线，可现场演示，源码暂不公开。从一句话需求出发，经需求、方案、编码、验证与人审，在 GitHub 模式下交付到可合并的 PR。</p>
+      <p class="document-meta">独立设计与实现 · 2026.04 至今 · 约 7,000 行 Python · 72 条自动化测试</p>
+      <div class="link-row" style="margin-top: 20px"><a href="./AIWorkflow_Overview.svg" target="_blank" rel="noopener">查看工作流宏观架构 SVG ↗</a></div>
+
+      <section id="decision" aria-labelledby="decision-title">
+        <h2 id="decision-title">为什么采用分阶段裁决</h2>
+        <p>生成代码、选择证据和宣布成功，如果都交给同一个概率系统，就缺少独立的交付判据。因此没有采用“一个大 Agent 自由循环调工具”，而是给每个阶段统一的结构。</p>
+        <p class="principle">生成候选 → 确定性验证 → 裁决：通过、转人工或拒绝</p>
+        <p>模型可以提出方案和返工建议，系统负责验收、权限、预算与状态推进。这个选择适用于有明确交付检查的任务；没有确定性判据的探索任务，仍然可以采用开放式循环。</p>
+      </section>
+
+      <section id="stages" aria-labelledby="stages-title">
+        <h2 id="stages-title">十阶段交付链</h2>
+        <p>十个阶段均设有不依赖模型自述的确定性验收。检查通过的含义受各阶段能力边界限制，结构完整不等于需求或方案在语义上正确。</p>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="十阶段交付链表格，可横向滚动">
+          <table><caption>每阶段的主要产物与系统检查</caption><thead><tr><th scope="col">阶段</th><th scope="col">主要产物与检查</th></tr></thead><tbody>
+            <tr><td>01 · 需求</td><td>结构化验收条件与命名测试；检查字段、编号唯一性和测试映射，不保证需求没有编造。</td></tr>
+            <tr><td>02 · 方案</td><td>文件、符号与改动计划；核验引用存在、保留验收映射，不保证方案本身正确。</td></tr>
+            <tr><td>03 · 编码</td><td>候选补丁由系统应用；补丁可应用且真实测试通过，否则进入有界修复循环。</td></tr>
+            <tr><td>04 · 静态门</td><td>执行语法、类型、密钥、危险写法与依赖检查。</td></tr>
+            <tr><td>05 · 充分性门</td><td>检查验收条件是否有测试认领；覆盖率能力的现有限制见下方边界。</td></tr>
+            <tr><td>06 · 装配</td><td>组装证据包，将代码版本、变更、策略版本及裁决、产物清单绑定到同一指纹。</td></tr>
+            <tr><td>07 · 人审</td><td>批准绑定当前证据指纹与 PR 代码版本，变化后立即失效。</td></tr>
+            <tr><td>08 · CI</td><td>人审通过后核验 GitHub 必过检查项；本地模式汇总本地门禁。</td></tr>
+            <tr><td>09 · 发布</td><td>生成模拟的 staging / canary 计划；不执行真实部署。</td></tr>
+            <tr><td>10 · 复盘</td><td>记录运行结果并回流台账；记录留存不等于复盘判断已经被独立验证。</td></tr>
+          </tbody></table>
+        </div>
+      </section>
+
+      <section id="mechanisms" aria-labelledby="mechanisms-title">
+        <h2 id="mechanisms-title">五个关键机制</h2>
+        <h3>01 · 补丁与测试的有界修复循环</h3>
+        <p>候选在独立工作目录中生成。托管模型只提交补丁文本，由系统验证和应用；补丁失败或测试未通过时，用压缩后的结构化反馈返工。后续版本都从本轮捕获的同一基线重做，避免在失败补丁上持续叠加。</p>
+        <h3>02 · 返工触发下游证据级联失效</h3>
+        <p>代码退回重写后，静态检查、覆盖率、证据包、人审和 CI 结论从变化点向下游全部作废。只重跑失败项会留下“旧证据盖在新代码上”的窗口；新代码必须重新获取对应证据。</p>
+        <h3>03 · 按失败性质路由</h3>
+        <p>瞬时故障退避重试，质量问题返工，缺信息或授权时暂停等待，人拒绝或预算耗尽时终止。CI 超时、限流和连接中断只重试 CI，因为这些故障没有提供需要修改代码的证据。每阶段有独立重试预算。</p>
+        <h3>04 · 真实执行与隔离边界</h3>
+        <p>测试由系统真实运行，Docker 路径使用非 root 用户、资源配额、执行超时，测试与扫描阶段断网，模型与 GitHub 凭证不进入沙箱。依赖安装步骤允许联网。环境可能降级为进程隔离，运行记录必须反映实际隔离级别，不能把降级路径说成容器隔离。</p>
+        <h3>05 · 检查点与恢复校验</h3>
+        <p>跨阶段状态结构化保存，阶段边界写入 SQLite。恢复时检查运行目录、仓库根、分支和代码版本与检查点是否一致；不一致即停止。恢复检查证明的是本机状态一致，无法单独证明外部副作用的状态。</p>
+      </section>
+
+      <section id="trust" aria-labelledby="trust-title">
+        <h2 id="trust-title">信任边界与独立证据</h2>
+        <ul><li><strong>仓库代码与注释：</strong>作为待处理数据，不能改写系统指令。</li><li><strong>模型生成的补丁：</strong>作为候选，由系统控制验证与应用。</li><li><strong>模型生成的测试：</strong>在隔离环境中运行，但不能单独为同源代码作证。</li></ul>
+        <p>模型如果误解了需求，代码与测试可能一起错误、一起通过。独立放行依据来自仓库存量测试、确定性静态检查、GitHub 必过项与人工评审。所有结论绑定同一份代码与证据指纹，避免混用不同版本的检查和审批。</p>
+        <h3>上下文按阶段组织</h3>
+        <p>需求阶段提供检索到的代码正文与行号；方案阶段提供符号索引；编码阶段再提供计划点名文件的正文。上下文有预算与截断标记。当前方案阶段取符号索引的前 200 条，尚未按相关性筛选，这是更大仓库场景的限制。</p>
+      </section>
+
+      <section id="boundaries" aria-labelledby="boundaries-title">
+        <h2 id="boundaries-title">当前实现边界</h2>
+        <div class="boundary"><strong>自研并在运行，可现场演示；未对外商用。</strong><p>约 7,000 行 Python 和 72 条自动化测试只说明实现规模，无生产吞吐数据，也不能据此声称研发提效或商业效果。</p></div>
+        <ul>
+          <li><strong>交付终态：</strong>GitHub 模式停在可合并状态，由仓库维护者决定合并；本地模式提供写回目标仓库的演示路径。发布阶段仅生成模拟计划。</li>
+          <li><strong>部署形态：</strong>当前使用单机运行器与 SQLite 检查点，尚未验证企业级长任务调度和生产吞吐。</li>
+          <li><strong>测试充分性：</strong>覆盖率基线当前未真实采集，缺少覆盖率依赖时可能走演示估算；未实现 mutation testing，不能声称已保证覆盖率不低于改动前。</li>
+          <li><strong>语义正确性：</strong>需求与方案检查主要保证结构、引用及映射；模型自评分仅用于触发澄清，未做概率校准，不是正确率。</li>
+          <li><strong>隔离与恢复：</strong>依赖安装仍有供应链风险；实际隔离级别需要核验，恢复校验不覆盖外部副作用。</li>
+          <li><strong>离线能力：</strong>无模型凭据时只提供特定分页场景的确定性演示，通用需求不会被伪装成已完成。</li>
+        </ul>
+      </section>
+
+      <section id="demo" aria-labelledby="demo-title">
+        <h2 id="demo-title">可现场演示的内容</h2>
+        <ol><li>跑通一条完整流水线，查看阶段轨迹、验证结果和可合并终态。</li><li>故意触发一次质量失败，观察门禁阻断、返工与下游证据失效。</li><li>核对审批与当前代码版本的绑定，说明为什么旧批准不能继续用于新代码。</li></ol>
+        <p>公开材料只说明机制、取舍与边界，不包含实现代码。源码暂不公开。</p>
+        <div class="link-row" style="margin-top: 20px"><a href="./AIWorkflow_Overview.svg" target="_blank" rel="noopener">查看完整架构图 ↗</a><a href="./index.html#ai-sdlc">返回项目一页纸 →</a></div>
+      </section>
+    </main>
+    <nav class="document-toc" aria-label="README 目录"><p>本页内容</p><a href="#decision">架构取舍</a><a href="#stages">十阶段交付链</a><a href="#mechanisms">五个关键机制</a><a href="#trust">信任与证据</a><a href="#boundaries">当前实现边界</a><a href="#demo">现场演示</a></nav>
+  </div>
+  <footer class="container footer"><p>SoberChrisGWC · AI-SDLC 公开设计说明</p><a href="./index.html">返回作品首页 →</a></footer>
+</body>
+</html>

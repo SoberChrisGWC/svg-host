@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI 应用架构师（Agent / RAG 方向）的项目与技术材料：SQL Agent、OCR-RAG、AI-SDLC 项目一页纸，架构图与公开设计说明。">
+  <meta name="theme-color" content="#174bcc">
+  <title>AI 应用架构 · 项目与技术材料 | SoberChrisGWC</title>
+  <link rel="canonical" href="https://soberchrisgwc.github.io/svg-host/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SoberChrisGWC">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:url" content="https://soberchrisgwc.github.io/svg-host/">
+  <meta property="og:title" content="AI 应用架构师（Agent / RAG）· 项目与技术材料">
+  <meta property="og:description" content="SQL Agent、OCR-RAG、AI-SDLC 三张项目一页纸：业务问题、职责边界、关键技术取舍与结果口径，附架构图与公开设计说明。上海 · 随时到岗。">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AI 应用架构师（Agent / RAG）· 项目与技术材料">
+  <meta name="twitter:description" content="SQL Agent、OCR-RAG、AI-SDLC 三张项目一页纸：业务问题、职责边界、关键技术取舍与结果口径，附架构图与公开设计说明。上海 · 随时到岗。">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./index.html" aria-label="SoberChrisGWC 作品首页"><span class="brand-mark" aria-hidden="true">S.</span>SoberChrisGWC</a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="#projects">项目一页纸</a>
+        <a href="#architecture">架构图</a>
+        <a href="./ai-sdlc.html">AI-SDLC 说明</a>
+        <a href="https://blog.csdn.net/Josh_scott" target="_blank" rel="noopener noreferrer">CSDN ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="intro-title">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">AI ENGINEERING / SELECTED WORK</p>
+            <h1 id="intro-title">AI 应用架构师<br><span>Agent / RAG 方向</span></h1>
+            <p class="hero-intro">9 年后端与平台工程经验，近两年半专注 AI 应用架构。带 5 人技术线交付 SQL Agent 与 OCR-RAG，自研并运行 AI 研发流水线。负责架构决策、关键链路实现与交付质量。</p>
+            <p class="availability">上海 · 随时到岗</p>
+          </div>
+          <nav class="project-index" aria-label="按技术方向阅读项目">
+            <p class="index-label">从你关心的方向开始</p>
+            <a href="#sql-agent"><span class="number">01</span><span><strong>SQL Agent</strong><small>数据 / BI · 检索取舍与安全执行</small></span><span class="arrow" aria-hidden="true">↗</span></a>
+            <a href="#ocr-rag"><span class="number">02</span><span><strong>OCR-RAG</strong><small>文档 / 知识库 · 双图编排与页级溯源</small></span><span class="arrow" aria-hidden="true">↗</span></a>
+            <a href="#ai-sdlc"><span class="number">03</span><span><strong>AI-SDLC</strong><small>平台 / 工程化 · 确定性门禁与失败恢复</small></span><span class="arrow" aria-hidden="true">↗</span></a>
+          </nav>
+        </div>
+        <div class="shared-context">
+          <p><strong>生产规模</strong> · SQL Agent 与 OCR-RAG 两条线合计日均 <strong>2,000+</strong> 次查询，覆盖 <strong>5</strong> 个业务部门</p>
+          <p><strong>架构主张</strong> · 模型提供候选，系统决定执行</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="section" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <h2 id="projects-title"><span class="section-number">01 /</span>项目一页纸</h2>
+          <p>业务问题、职责边界、关键取舍与结果口径</p>
+        </div>
+
+        <article class="project-card" id="sql-agent" aria-labelledby="sql-title">
+          <header class="project-header">
+            <div><h3 id="sql-title">SQL Agent · 自然语言数据分析</h3><p>NL2SQL / Schema Linking / SQL 执行治理</p></div>
+            <span class="status">企业生产项目</span>
+          </header>
+          <dl class="project-grid">
+            <div><dt class="field-label"><span>01</span>业务问题</dt><dd>运营与分析人员需要从数百张业务表中取数，常规需求要等待 1–3 天研发排期。自然语言查询需要同时解决业务口径匹配和数据库执行风险。</dd></div>
+            <div><dt class="field-label"><span>02</span>我负责的范围</dt><dd>2024.05–2026.03，在 NTT DATA 带 5 人技术线共同交付两条生产线；本项目于 2025.10 首次上线。负责架构、检索上下文、数据库运行时、SQL 安全与上线质量。</dd></div>
+            <div><dt class="field-label"><span>03</span>一个关键技术取舍</dt><dd>采用<strong>业务域分流 → 表、字段、业务文档、SQL 示例四路召回 → 列级 Schema Linking</strong>。否掉“把全表 Schema 直接塞给模型”：无关字段会稀释语义，并推高成本。增加检索复杂度前，用同一冻结集做消融验证。</dd></div>
+            <div><dt class="field-label"><span>04</span>结果与口径</dt><dd><strong class="metric">60% → 24% → 10%</strong><span class="metric-note">SQL Agent 离线消融的检索误拒率；同一批 60 条冻结评测集中的 50 条可回答问题。分别对应表级基线、补齐四路检索、加入业务域分流。</span><p class="secondary-result">有效只读端到端成功率 <strong>约 86%</strong>。</p></dd></div>
+          </dl>
+          <div class="project-links">
+            <div class="link-row"><h4 class="field-label"><span>05</span>深入链接</h4><a href="./nl2sql_overview.svg" target="_blank" rel="noopener">查看 NL2SQL 架构图 ↗</a><a href="#sql-agent" aria-label="SQL Agent 一页纸直达链接">本项目直达链接 #</a></div>
+            <details>
+              <summary>展开执行安全与成本口径</summary>
+              <div class="detail-body"><p><strong>五道执行闸：</strong>只读账号、单语句 SELECT、AST 校验、全表扫描保护、执行超时。约束固化在执行链路中，模型生成的 SQL 不能直接获得执行权。</p><p><strong>SQL Agent 线月 token 成本下降约 30%。</strong>通过重排、去重与 token 预算控制收敛上下文；这与 OCR-RAG 样本回放中的“输入上下文减少约 30%”是两个指标。</p><p class="note">AST 校验解决 SQL 执行安全；检索误拒率下降来自检索架构调整，两者分开归因。</p></div>
+            </details>
+          </div>
+        </article>
+
+        <article class="project-card" id="ocr-rag" aria-labelledby="ocr-title">
+          <header class="project-header">
+            <div><h3 id="ocr-title">OCR-RAG · 多模态文档问答</h3><p>文档资产治理 / 双图编排 / 页级强制溯源</p></div>
+            <span class="status">企业生产项目</span>
+          </header>
+          <dl class="project-grid">
+            <div><dt class="field-label"><span>01</span>业务问题</dt><dd>业务人员从扫描件、跨页表格与复杂版式文档中查找信息，人工定位慢。OCR 的错字、错数和表头丢失还会传递到答案，必须能回到原页复核。</dd></div>
+            <div><dt class="field-label"><span>02</span>我负责的范围</dt><dd>2024.05–2026.03，在 NTT DATA 带 5 人技术线共同交付两条生产线；本项目于 2025.12 首次上线。负责双图架构、OCR 解析与切分、入库状态机及任务重试。</dd></div>
+            <div><dt class="field-label"><span>03</span>一个关键技术取舍</dt><dd>把<strong>在线问答与离线入库拆成两张图</strong>，用带版本的文档中间结构隔离 OCR 与下游。否掉“一条链串完入库和问答”：两者的延迟与吞吐诉求不同，拆开后可独立恢复、演进，入库失败不阻断已入库文档的在线问答。</dd></div>
+            <div><dt class="field-label"><span>04</span>结果与口径</dt><dd><strong class="metric">P95 约 3.2s</strong><span class="metric-note">已入库文档的在线问答延迟，不含首次入库。</span><p class="secondary-result">灰度期业务采纳率 <strong>约 70%</strong>。</p><span class="metric-note">样本回放中，通过重排、去重与 token 预算控制，输入上下文减少约 30%。</span></dd></div>
+          </dl>
+          <div class="project-links">
+            <div class="link-row"><h4 class="field-label"><span>05</span>深入链接</h4><a href="#ocr-rag" aria-label="OCR-RAG 一页纸直达链接">本项目直达链接 #</a></div>
+            <details id="ocr-design">
+              <summary>展开双图链路与页级溯源说明</summary>
+              <div class="detail-body"><h4>离线入库</h4><p>逐页 OCR → 带版本的中间结构（正文、页信息、元数据）→ 版式感知切分 → 索引。OCR 升级由中间结构隔离；入库状态与重试独立管理。</p><h4>在线问答</h4><p>问题处理 → Dense + BM25 混合检索与 RRF 融合 → 重排、去重与预算控制 → 带页级引用的回答。证据分数不足时确定性拒答；重排服务不可用时直接失败，不静默降级。</p><p><strong>引用来自文档块的页信息，由系统生成，不让模型编页码。</strong>每个答案能定位到源 PDF 的具体页，支持审计复核；溯源并不替代 OCR 质量检查。</p></div>
+            </details>
+          </div>
+        </article>
+
+        <article class="project-card" id="ai-sdlc" aria-labelledby="sdlc-title">
+          <header class="project-header">
+            <div><h3 id="sdlc-title">AI-SDLC · AI 原生研发流水线</h3><p>Agent Harness / 证据与审批绑定 / 级联失效</p></div>
+            <span class="status independent">独立自研 · 在运行</span>
+          </header>
+          <dl class="project-grid">
+            <div><dt class="field-label"><span>01</span>业务问题</dt><dd>研发人员把编码交给模型后，仍要判断变更是否满足需求、证据是否对应当前代码。返工时沿用旧检查或旧审批，会让新代码带着上一版结论进入交付。</dd></div>
+            <div><dt class="field-label"><span>02</span>我负责的范围</dt><dd>2026.04 至今，1 人独立完成架构、实现与自动化测试。自研并在运行的 AI 研发流水线，可现场演示，源码暂不公开。</dd></div>
+            <div><dt class="field-label"><span>03</span>一个关键技术取舍</dt><dd>每阶段采用<strong>生成 → 确定性验证 → 裁决</strong>，否掉“一个大 Agent 自由循环调工具”。模型只提交候选；系统管理补丁、测试、证据与审批。退回重写时，下游检查、人审和 CI 结论级联失效，重新取证。</dd></div>
+            <div><dt class="field-label"><span>04</span>结果与口径</dt><dd><strong class="metric">10 阶段 · 72 条测试</strong><span class="metric-note">十阶段全部设有不依赖模型的确定性验收；约 7,000 行 Python、72 条自动化测试仅说明实现规模。</span><p class="secondary-result">未对外商用，无生产吞吐或提效数据。GitHub 模式停在可合并状态，不自动合并。</p></dd></div>
+          </dl>
+          <div class="project-links"><div class="link-row"><h4 class="field-label"><span>05</span>深入链接</h4><a href="./AIWorkflow_Overview.svg" target="_blank" rel="noopener">查看工作流架构图 ↗</a><a href="./ai-sdlc.html">阅读公开版 README →</a><a href="#ai-sdlc" aria-label="AI-SDLC 一页纸直达链接">本项目直达链接 #</a></div></div>
+        </article>
+      </section>
+
+      <section class="section" id="architecture" aria-labelledby="architecture-title">
+        <div class="section-heading"><h2 id="architecture-title"><span class="section-number">02 /</span>架构图</h2><p>原始 SVG · 可单独打开查看完整结构</p></div>
+        <div class="diagram-grid">
+          <a class="diagram-card" href="./nl2sql_overview.svg" target="_blank" rel="noopener">
+            <div class="diagram-preview"><img src="./nl2sql_overview.svg" alt="NL2SQL 架构预览：问题理解、域内检索、SQL 生成、安全执行与分析结果" width="1303" height="594" loading="lazy"></div>
+            <div class="diagram-description"><h3>NL2SQL Agent 架构设计 <span class="arrow" aria-hidden="true">↗</span></h3><p>从自然语言提问到受控只读查询，管理与运行治理贯穿全流程。</p><span class="text-link">查看完整 SVG</span></div>
+          </a>
+          <a class="diagram-card" href="./AIWorkflow_Overview.svg" target="_blank" rel="noopener">
+            <div class="diagram-preview"><img src="./AIWorkflow_Overview.svg" alt="AI 原生研发工作流局部预览，打开可查看十阶段编排、适配器与横切治理的完整长图" width="1023" height="4115" loading="lazy"></div>
+            <div class="diagram-description"><h3>AI 原生研发工作流宏观架构 <span class="arrow" aria-hidden="true">↗</span></h3><p>十阶段控制平面、可替换适配器，以及与阶段正交的治理底座。</p><span class="text-link">查看完整 SVG 长图</span></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="section" id="writing" aria-labelledby="writing-title">
+        <div class="section-heading"><h2 id="writing-title"><span class="section-number">03 /</span>技术说明与博客</h2></div>
+        <div class="reading-grid">
+          <article class="readme-card"><p class="eyebrow">AI-SDLC / PUBLIC README</p><h3>模型提供候选，裁决权在系统</h3><p>公开说明十阶段机制、失败路由、证据失效与信任边界，以及当前实现能证明什么、不能证明什么。</p><div class="link-row"><a href="./ai-sdlc.html">阅读 AI-SDLC 公开版 README →</a></div><p class="note">可现场演示完整流水线，以及一次被门禁拦截的失败。源码暂不公开。</p></article>
+          <article class="blog-card"><p class="eyebrow">TECHNICAL WRITING</p><h3>CSDN · Josh_scott</h3><p>技术文章与工程实践。</p><div class="link-row"><a href="https://blog.csdn.net/Josh_scott" target="_blank" rel="noopener noreferrer">访问 CSDN 博客 ↗</a></div></article>
+        </div>
+      </section>
+      <footer class="footer"><p>SoberChrisGWC · AI 应用架构 / Agent / RAG</p><a href="#main">回到顶部 ↑</a></footer>
+    </div>
+  </main>
+</body>
+</html>
